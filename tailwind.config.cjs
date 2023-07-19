@@ -4,10 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        background: "#11021D",
+        lightPurple: "#7000FF",
         darkestPurple: "#200726",
         darkPurple: "#350C40",
         purple: "#4A1259",
-        lightPurple: "#622773",
         greyish: "#A192A6",
         fadedGreen: "#3F8C68",
         midGreen: "#0B8C50",

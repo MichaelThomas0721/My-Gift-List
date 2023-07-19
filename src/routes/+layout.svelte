@@ -1,5 +1,12 @@
 <script>
   import "../app.css";
+  import "@fontsource/nunito";
 </script>
 
-<div class="min-h-screen w-full bg-greenGrey text-white flex flex-col"><slot /></div>
+<div class="min-h-screen w-full bg-background text-white flex flex-col p-3"><slot /></div>
+
+<style>
+  * {
+    font-family: 'Nunito', sans-serif;
+  }
+</style>
