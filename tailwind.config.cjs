@@ -15,7 +15,10 @@ export default {
         darkGrey: "#1C2426",
         greenGrey: "#2A403C",
         fadedDarkGreen: "#45735D",
-        muddyGreen: "#0e1b0e"
+        muddyGreen: "#0e1b0e",
+        coolTeal: "#52ffeb",
+        "coolDarkGreen": "#0a2925",
+        "coolDarkBlue": "#111c28"
       },
       dropShadow: {
         large: '0 0px 50px rgba(0, 0, 0, 0.8)',

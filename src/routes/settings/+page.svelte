@@ -1,0 +1,5 @@
+<div>
+    <form action="?/logout" method="POST">
+        <button>Log Out</button>
+    </form>
+</div>
