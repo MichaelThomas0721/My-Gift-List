@@ -16,7 +16,7 @@ export const load = async ({ cookies, params }) => {
   let wishlistItems = await FetchMongo({ listId: profileUser._id }, "items")
   let follow = "self"
   if (params?.slug) {
-    await FetchMongo({ following: profileUser._id, follower: user._id }, "friends", true)
+    follow = await FetchMongo({ following: profileUser._id, follower: user._id }, "friends", true)
   }
   return ({ profileId: profileUser._id, uid: user._id, follow, username: profileUser.username, wishlistItems })
 }

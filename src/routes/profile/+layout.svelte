@@ -32,7 +32,7 @@
     <span class="flex flex-row gap-3 overflow-hidden text-ellipsis">
         <div class="w-32 aspect-square rounded-md bg-gray-500 flex-shrink-0" />
         <div class="flex-grow flex flex-col min-w-0">
-            <p>@{data.username}</p>
+            <p>@{username}</p>
         </div></span
     >
     {#if profileId == uid}
@@ -41,7 +41,7 @@
         <FollowButton Action={Follow} {follow} />
     {/if}
     <span class="flex flex-row justify-between text-2xl"
-        ><button>Wish List:</button><button>All Lists</button></span
+        ><a href={`/lists/${profileId}`}>Wish List:</a><button>All Lists</button></span
     >
     <ItemList items={wishlistItems} Action={OpenItem} />
 </div>

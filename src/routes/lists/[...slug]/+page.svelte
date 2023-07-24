@@ -4,8 +4,9 @@
     import ItemList from "$components/lists/itemList.svelte";
     import Popup from "$components/lists/popup.svelte";
     import ApiFetcher from "$services/ApiFetcher";
-    let { list, items } = data;
+    let { list, items, owner } = data;
     const popupItemTemplate = {
+        _id: null,
         Name: "",
         Price: "",
         Notes: "",
@@ -15,21 +16,6 @@
     };
     let popupItem = popupItemTemplate;
     let showPopup = false;
-
-    function Update() {
-        ApiFetcher("/api/update-mongo", {
-            params: { _id: items[0]._id },
-            newValues: { name: "Charge yuh Phone" },
-            collection: "items",
-        });
-    }
-
-    function Delete() {
-        ApiFetcher("/api/delete-mongo", {
-            params: { _id: items[items.length - 1]._id },
-            collection: "items",
-        });
-    }
 
     async function SubmitItem() {
         if (popupItem._id) {
@@ -68,13 +54,33 @@
         }
         showPopup = true;
     }
+
+    function ClosePopup() {
+        showPopup = false;
+    }
+
+    async function ToggleTaken() {
+        await ApiFetcher("/api/update-mongo", {
+            params: { _id: popupItem._id },
+            newValues: { taken: !popupItem.taken },
+            collection: "items",
+        });
+        popupItem.taken = !popupItem.taken;
+        let idx = items.findIndex((x) => x._id == popupItem._id);
+        items[idx] = popupItem;
+    }
 </script>
 
 <div>
     {#if showPopup}
-        <Popup bind:item={popupItem} Action={SubmitItem} />
+        <Popup
+            bind:item={popupItem}
+            Action={SubmitItem}
+            {ClosePopup}
+            {ToggleTaken}
+            {owner}
+        />
     {/if}
     <ItemList {items} Action={ShowPopup} />
     <button on:click={() => ShowPopup(false)}>ShowPopup</button>
-    <button on:click={Delete}>Delete</button>
 </div>
