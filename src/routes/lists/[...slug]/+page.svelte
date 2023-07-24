@@ -4,6 +4,7 @@
     import ItemList from "$components/lists/itemList.svelte";
     import Popup from "$components/lists/popup.svelte";
     import ApiFetcher from "$services/ApiFetcher";
+    import navaction from "$lib/navaction";
     let { list, items, owner } = data;
     const popupItemTemplate = {
         _id: null,
@@ -16,6 +17,7 @@
     };
     let popupItem = popupItemTemplate;
     let showPopup = false;
+    $navaction = () => ShowPopup(false);
 
     async function SubmitItem() {
         if (popupItem._id) {
@@ -81,7 +83,7 @@
     }
 </script>
 
-<div>
+<div class="w-full h-full flex-grow">
     {#if showPopup}
         <Popup
             bind:item={popupItem}
@@ -91,7 +93,7 @@
             {DeleteItem}
             {owner}
         />
+    {:else}
+        <ItemList {items} Action={ShowPopup} />
     {/if}
-    <ItemList {items} Action={ShowPopup} />
-    <button on:click={() => ShowPopup(false)}>ShowPopup</button>
 </div>

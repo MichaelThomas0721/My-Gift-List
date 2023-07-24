@@ -1,7 +1,7 @@
 <script>
-    export let icon, fill = false;
+    export let icon, fill = false, href="/";
 </script>
 
-<button class="flex justify-center items-center h-full aspect-square">
+<a {href} class="flex justify-center items-center h-full aspect-square">
     <iconify-icon icon={`${icon}${fill ? "-fill" : ""}`} class="text-4xl"/>
-</button>
+</a>

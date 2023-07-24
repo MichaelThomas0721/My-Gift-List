@@ -6,7 +6,7 @@
 </script>
 
 <div class="min-h-screen w-full bg-background text-white flex flex-col">
-  <div class="p-3 h-full overflow-hidden">
+  <div class="p-3 h-full w-full flex-grow overflow-hidden">
     <slot />
   </div>
   <Navbar />
