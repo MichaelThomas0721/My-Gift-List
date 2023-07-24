@@ -18,7 +18,7 @@ export const actions = {
         let user = await FetchMongo(params, "users")
         if (!user) return fail(400, { credentials: true })
 
-        cookies.set('user', user, {
+        cookies.set('user', JSON.stringify(user[0]), {
             path: '/',
 
             httpOnly: true,
