@@ -7,6 +7,7 @@
         Action,
         ClosePopup,
         ToggleTaken,
+        DeleteItem,
         owner = false;
 </script>
 
@@ -29,6 +30,9 @@
     {/each}
     {#if owner}
         <SubmitButton {Action} title="Submit" />
+        {#if item._id}
+        <SubmitButton Action={DeleteItem} title="Delete" className="bg-red-500" />
+        {/if}
     {:else}
         <SubmitButton
             Action={ToggleTaken}

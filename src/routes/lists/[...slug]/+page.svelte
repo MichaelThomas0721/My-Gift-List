@@ -69,6 +69,16 @@
         let idx = items.findIndex((x) => x._id == popupItem._id);
         items[idx] = popupItem;
     }
+
+    async function DeleteItem() {
+        await ApiFetcher("/api/delete-mongo", {
+            params: { _id: popupItem._id },
+            collection: "items",
+        });
+        let idx = items.findIndex((x) => x._id == popupItem._id);
+        items = [...items.splice(idx, idx)];
+        showPopup = false;
+    }
 </script>
 
 <div>
@@ -78,6 +88,7 @@
             Action={SubmitItem}
             {ClosePopup}
             {ToggleTaken}
+            {DeleteItem}
             {owner}
         />
     {/if}
