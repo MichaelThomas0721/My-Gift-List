@@ -2,11 +2,9 @@ import { fail, redirect } from '@sveltejs/kit';
 import FetchMongo from '$services/FetchMongo';
 
 export const load = async ({ cookies }) => {
-    console.log(cookies)
     if (cookies.get('user')) {
         throw redirect(302, '/profile')
     }
-    console.log("BRUV")
 }
 
 export const actions = {

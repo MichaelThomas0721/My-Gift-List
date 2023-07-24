@@ -1,0 +1,16 @@
+import { fail, redirect } from '@sveltejs/kit';
+import FetchMongo from '$services/FetchMongo';
+
+export const load = async ({ cookies, params }) => {
+  if (!cookies.get('user')) {
+    return { follow: false }
+  }
+  let profileUser = await FetchMongo({ username: params.slug }, "users", true);
+  let user = JSON.parse(cookies.get('user'));
+  if (user._id == profileUser._id) {
+    throw redirect(302, '/profile')
+  }
+  let wishlistItems = await FetchMongo({ listId: profileUser._id }, "items")
+  let follow = await FetchMongo({ following: profileUser._id, follower: user._id }, "friends", true)
+  return ({ profileId: profileUser._id, uid: user._id, follow: follow, username: profileUser.username, wishlistItems })
+}

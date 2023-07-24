@@ -1,0 +1,1 @@
+<a href="/settings" class="w-full rounded-full bg-lightPurple hover:bg-opacity-80"><p class="text-center text-lg font-bold">Settings</p></a>
