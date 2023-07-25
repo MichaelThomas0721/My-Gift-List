@@ -7,7 +7,7 @@ export const load = async ({ cookies, params }) => {
     let items = await FetchMongo({ listId: params?.slug }, "items")
     let owner = false;
     if (cookies.get('user')) {
-        if (JSON.parse(cookies.get('user'))._id = list.userId) {
+        if (JSON.parse(cookies.get('user'))._id == list.userId) {
             owner = true;
         }
     }

@@ -1,10 +1,10 @@
 <script lang="ts">
     export let data;
-    import ItemList from "$components/lists/itemList.svelte";
+    import ItemList from "$components/list/itemList.svelte";
     import FollowButton from "$components/profile/FollowButton.svelte";
     import SettingsButton from "$components/profile/SettingsButton.svelte";
     import ApiFetcher from "$services/ApiFetcher";
-    let { profileId, uid, username, wishlistItems, follow } = data as any;
+    let { profileId, uid, username, wishlistItems, follow, owner } = data as any;
 
     async function Follow() {
         if (follow) {
@@ -30,7 +30,7 @@
 
 <div class="w-full max-w-3xl flex flex-col gap-2">
     <span class="flex flex-row gap-3 overflow-hidden text-ellipsis">
-        <div class="w-32 aspect-square rounded-md bg-gray-500 flex-shrink-0" />
+        <div class="w-32 aspect-square rounded-md bg-gray-500 flex-shrink-0 flex justify-center items-center">Coming Soon</div>
         <div class="flex-grow flex flex-col min-w-0">
             <p>@{username}</p>
         </div></span
@@ -41,9 +41,9 @@
         <FollowButton Action={Follow} {follow} />
     {/if}
     <span class="flex flex-row justify-between text-2xl"
-        ><a href={`/lists/${profileId}`}>Wish List:</a><button>All Lists</button></span
+        ><a href={`/list/${profileId}`}>Wish List:</a><a href={`/lists/${username}`}>All Lists</a></span
     >
-    <ItemList items={wishlistItems} Action={OpenItem} />
+    <ItemList items={wishlistItems} Action={OpenItem} {owner} />
 </div>
 
 <slot />
