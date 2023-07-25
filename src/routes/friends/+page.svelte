@@ -2,6 +2,8 @@
     import FriendItem from "$components/friends/friendItem.svelte";
     import FrostedTextInput from "$components/reusable/FrostedTextInput.svelte";
     import ApiFetcher from "$services/ApiFetcher";
+    import navaction from "$root/lib/navaction";
+    $navaction = null;
     export let data;
     let { friends, username } = data;
     let search = "";

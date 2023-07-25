@@ -3,6 +3,8 @@
   import "../app.css";
   import "@fontsource/nunito";
   import "iconify-icon";
+  import navaction from "$lib/navaction";
+  $navaction = null;
 </script>
 
 <div class="min-h-screen w-full bg-background text-white flex flex-col">

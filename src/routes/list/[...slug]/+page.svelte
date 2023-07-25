@@ -16,7 +16,7 @@
     };
     let popupItem = popupItemTemplate;
     let showPopup = false;
-    $navaction = () => ShowPopup(false);
+    $navaction = owner ? () => ShowPopup(false) : null;
 
     async function SubmitItem() {
         if (popupItem._id) {
@@ -93,6 +93,7 @@
             {owner}
         />
     {:else}
+        <h1 class="text-3xl font-bold text-center py-3">List Items</h1>
         <ItemList {items} Action={ShowPopup} {owner} />
     {/if}
 </div>

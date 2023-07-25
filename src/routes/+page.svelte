@@ -1,6 +1,6 @@
 <script>
-  export let data;
-  const { text } = data;
+  import navaction from "$root/lib/navaction";
+  $navaction = null;
 </script>
 
 <div class="">
@@ -8,7 +8,7 @@
   <h1
     class="text-[11vw] font-bold text-white text-center bg-gradient-to-b from-darkGreen to-darkGreen"
   >
-    {text}
+    There is no homepage 0.0
   </h1>
 </div>
 

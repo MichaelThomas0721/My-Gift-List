@@ -2,6 +2,8 @@
     import Frame from "$components/loginsignup/frame.svelte";
     let fields = ["Email", "Username", "Password", "Confirm Password"];
     let fieldBinds = {};
+    import navaction from "$root/lib/navaction";
+    $navaction = null;
 </script>
 
 <Frame

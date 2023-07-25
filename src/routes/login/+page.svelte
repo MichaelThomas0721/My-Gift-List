@@ -4,16 +4,8 @@
     let fields = ["Email", "Password"];
     let fieldBinds = {};
     let staySignedIn = false;
-    async function Login() {
-        // let user = await ApiFetcher("/api/fetch-mongo", {
-        //     params: {
-        //         email: fieldBinds.Email,
-        //         password: fieldBinds.Password,
-        //     },
-        //     collection: "users"
-        // });
-        // console.log(user);
-    }
+    import navaction from "$root/lib/navaction";
+    $navaction = null;
 </script>
 
 <Frame
