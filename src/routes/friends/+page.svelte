@@ -10,9 +10,15 @@
     async function SearchFriends() {
         if (search != username)
             results = await ApiFetcher("/api/fetch-mongo", {
-                params: { email: search },
+                params: { username: search },
                 collection: "users",
             });
+        for (let i = 0; i < results.length; i++) {
+            if (friends.some((item) => item.username == results[i].username)) {
+                results.splice(i, i);
+                i--;
+            }
+        }
     }
 </script>
 
