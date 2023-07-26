@@ -30,7 +30,9 @@
         }
     }
 
-    function OpenItem() {}
+    function OpenItem(item) {
+        goto(`/list/${profileId}`)
+    }
 </script>
 
 <div class="w-full max-w-3xl flex flex-col gap-2">

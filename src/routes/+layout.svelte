@@ -7,8 +7,10 @@
   $navaction = null;
 </script>
 
-<div class="min-h-screen w-full bg-background text-white flex flex-col">
-  <div class="p-3 h-full w-full flex-grow overflow-hidden">
+<div
+  class="h-full min-h-full w-full bg-background text-white flex flex-col overflow-hidden box-border"
+>
+  <div class="p-3 w-full overflow-hidden">
     <slot />
   </div>
   <Navbar />
