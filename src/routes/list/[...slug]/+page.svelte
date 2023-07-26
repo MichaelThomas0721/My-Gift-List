@@ -83,17 +83,17 @@
 </script>
 
 <div class="w-full h-full flex-grow">
-    {#if showPopup}
-        <Popup
-            bind:item={popupItem}
-            Action={SubmitItem}
-            {ClosePopup}
-            {ToggleTaken}
-            {DeleteItem}
-            {owner}
-        />
-    {:else}
+    <div class={showPopup ? "hidden" : ""}>
         <h1 class="text-3xl font-bold text-center py-3">List Items</h1>
         <ItemList {items} Action={ShowPopup} {owner} />
-    {/if}
+    </div>
+    <Popup
+        bind:item={popupItem}
+        Action={SubmitItem}
+        {ClosePopup}
+        {ToggleTaken}
+        {DeleteItem}
+        {owner}
+        className={showPopup ? "" : "hidden"}
+    />
 </div>

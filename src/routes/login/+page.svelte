@@ -1,10 +1,28 @@
 <script>
     import Frame from "$components/loginsignup/frame.svelte";
-    import ApiFetcher from "$services/ApiFetcher";
-    let fields = ["Email", "Password"];
+    import { required as requiredM } from "$lib/validatorMessages";
+    let fields = [
+        {
+            name: "Username",
+            validators: {
+                validators: [required],
+                names: ["required"],
+                messages: [requiredM],
+            },
+        },
+        {
+            name: "Password",
+            validators: {
+                validators: [required],
+                names: ["required"],
+                messages: [requiredM],
+            },
+        },
+    ];
     let fieldBinds = {};
     let staySignedIn = false;
     import navaction from "$root/lib/navaction";
+    import { required } from "svelte-use-form";
     $navaction = null;
 </script>
 

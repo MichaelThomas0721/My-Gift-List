@@ -30,6 +30,7 @@
 		"dotenv": "^16.3.1",
 		"iconify-icon": "^1.0.8",
 		"mongodb": "^5.7.0",
-		"svelte-icons-pack": "^2.1.0"
+		"svelte-icons-pack": "^2.1.0",
+		"svelte-use-form": "^2.8.0"
 	}
 }

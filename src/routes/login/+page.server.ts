@@ -10,13 +10,15 @@ export const load = async ({ cookies }) => {
 export const actions = {
     login: async ({ cookies, request }) => {
         const data = await request.formData()
-        const email = data.get('Email');
-        const password = data.get('Password');
-        let params = { "email": email, "password": password }
+        const username = data.get('UsernameInput');
+        const password = data.get('PasswordInput');
+        if (!username || !password) return fail(400, { credentials: true })
+        let params = { "email": username, "password": password }
         let user = await FetchMongo(params, "users")
+        user = user[0]
         if (!user) return fail(400, { credentials: true })
 
-        cookies.set('user', JSON.stringify(user[0]), {
+        cookies.set('user', JSON.stringify(user), {
             path: '/',
 
             httpOnly: true,
