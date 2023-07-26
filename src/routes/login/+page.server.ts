@@ -1,5 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import FetchMongo from '$services/FetchMongo';
+import ComparePasswords from '$services/ComparePasswords';
 
 export const load = async ({ cookies }) => {
     if (cookies.get('user')) {
@@ -13,10 +14,15 @@ export const actions = {
         const username = data.get('UsernameInput');
         const password = data.get('PasswordInput');
         if (!username || !password) return fail(400, { credentials: true })
-        let params = { "email": username, "password": password }
+        let params = { "username": username }
         let user = await FetchMongo(params, "users")
         user = user[0]
         if (!user) return fail(400, { credentials: true })
+
+        let match = await ComparePasswords(user.password, String(password));
+        if (!match) {
+            return fail(400, { credentials: true })
+        }
 
         cookies.set('user', JSON.stringify(user), {
             path: '/',

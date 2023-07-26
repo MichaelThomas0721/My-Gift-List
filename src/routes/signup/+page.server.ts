@@ -4,6 +4,8 @@ import AddObjectId from '$services/AddObjectId.js';
 import FetchMongo from '$services/FetchMongo.js';
 import CreateIndexMongo from '$services/CreateIndexMongo.js';
 import { SECRET_SETUP } from '$env/static/private';
+import EncryptString from '$services/EncryptString.js';
+import Hash from '$services/Hash.js';
 
 export const load = async ({ cookies }) => {
     if (cookies.get('user')) {
@@ -18,14 +20,15 @@ export const actions = {
         const username = data.get('UsernameInput');
         const password = data.get('PasswordInput');
         if (!email || !username || !password) return fail(400, { credentials: true })
-        let params = { "email": email, "username": username, "password": password }
+        let hashedPassword = await Hash(String(password));
+        let params = { "email": EncryptString(String(email)), "username": username, "password": hashedPassword }
         if (SECRET_SETUP) {
             await CreateIndexMongo({ "username": 1 }, { "unique": true }, "users");
             await CreateIndexMongo({ "email": 1 }, { "unique": true }, "users");
         }
         let rData = await AddMongo(params, "users");
         if (!rData) {
-            return fail(403, {data: 'Invalid username or password'});
+            return fail(403, { data: 'Invalid username or password' });
         }
 
         let user = await FetchMongo({ _id: rData.insertedId }, "users")
