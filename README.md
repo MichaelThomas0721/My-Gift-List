@@ -1,9 +1,10 @@
-# SvelteKit TailwindCSS SASS TypeScript Template
+# My Gift List
 
-This is a template I created with a stack that I use frequently, I decided not to include a database or cms
-with it because that varies the most. If you aren't me, feel free to use this template, if there are any issues
-you can submit an issue on GitHub and I'll see what I can do. Before submitting an issue, please try it with an
-LTS version of node and npm.
+My gift list is a website that I created because my family kept buying the
+same gifts for peoples birthdays, this fixes that problem by letting users
+make items as taken so that other users know not to purchase that gift.
+
+The code is open source :)
 
 ## Setup
 
@@ -19,11 +20,7 @@ To start the dev server run the following
 npm run dev
 
 # or start the server and open the app in a new browser tab
-npm run dev -- --open
-
-# or start with vite
-npx vite --port=4000
-```
+npm run dev
 
 ## Building
 
@@ -32,9 +29,3 @@ To create a production version of your app:
 ```bash
 npm run build
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-### Happy Coding
