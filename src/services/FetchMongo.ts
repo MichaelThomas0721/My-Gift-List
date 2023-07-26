@@ -1,3 +1,5 @@
+// A nice and easy way to fetch the mongo db
+
 import clientPromise from "$lib/mongodb";
 
 export default async function FetchMongo(params, collection, one = false) {

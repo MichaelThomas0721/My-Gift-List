@@ -1,3 +1,5 @@
+// Function for easily updated documents in the mongo db
+
 import clientPromise from "$lib/mongodb";
 
 export default async function UpdateMongo(params, newValues, collection) {
@@ -5,7 +7,7 @@ export default async function UpdateMongo(params, newValues, collection) {
     const client = await clientPromise;
     const db = client.db();
 
-    // Get the data from mongodb using the params and collection
+    // Try to update the document in the database using the params, new values and collection
     try {
         await db.collection(collection).updateOne(params, { $set: newValues })
         return true;

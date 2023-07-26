@@ -1,3 +1,5 @@
+<!-- A homepage isn't high in my priority list currently so this is what it is -->
+
 <script>
   import navaction from "$root/lib/navaction";
   $navaction = null;

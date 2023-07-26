@@ -1,3 +1,5 @@
+// Function for hashing string (just passwords at this point)
+
 import { randomBytes, scrypt } from "crypto";
 import { promisify } from "util";
 

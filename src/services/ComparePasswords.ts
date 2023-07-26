@@ -1,3 +1,6 @@
+// Compare hashed passwords without unhashing them
+// (They can't be unhashed and you wouldn't want to anyways)
+
 import { scrypt, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 

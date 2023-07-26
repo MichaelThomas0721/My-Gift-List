@@ -1,3 +1,5 @@
+// Depricated old version of the ApiFetcher, basically the same but without the abs url
+
 export default async function ApiRequest(url, request, fetch) {
     try {
         const res = await fetch(url, {
