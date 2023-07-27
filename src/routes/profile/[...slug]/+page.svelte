@@ -4,8 +4,9 @@
     import FollowButton from "$components/profile/FollowButton.svelte";
     import SettingsButton from "$components/profile/SettingsButton.svelte";
     import ApiFetcher from "$services/ApiFetcher";
-    let { profileId, uid, username, wishlistItems, follow, owner } =
-        data as any;
+    // It is done like this to make it reactive (updates when data updates)
+    $: ({ profileId, uid, username, wishlistItems, follow, owner } =
+        data as any);
     import navaction from "$root/lib/navaction";
     import { goto } from "$app/navigation";
     import Head from "$components/reusable/Head.svelte";
@@ -32,10 +33,9 @@
     }
 
     function OpenItem(item) {
-        goto(`/list/${profileId}`)
+        goto(`/list/${profileId}`);
     }
 </script>
-
 
 <Head title={username} />
 <div class="w-full max-w-3xl flex flex-col gap-2">

@@ -2,6 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import FetchMongo from '$services/FetchMongo';
 
 export const load = async ({ cookies, params }) => {
+  console.log("TTTTTTTTTTTTTTT", params)
   if (!cookies.get('user') && !params?.slug) {
     throw redirect(302, '/login')
   }
