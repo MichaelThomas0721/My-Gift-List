@@ -44,9 +44,11 @@
     ];
     let fieldBinds = {};
     import navaction from "$root/lib/navaction";
+    import Head from "$components/reusable/Head.svelte";
     $navaction = null;
 </script>
 
+<Head title="Sign Up" />
 <Frame
     title="Sign Up"
     {fields}

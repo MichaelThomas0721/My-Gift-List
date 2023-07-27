@@ -5,7 +5,7 @@
   import "../app.css";
   // The current font I am using
   import "@fontsource/nunito";
-  // Import iconify here so I don't need to on every page it is used
+  // Import iconify here so I can use it everywhere
   import "iconify-icon";
 </script>
 

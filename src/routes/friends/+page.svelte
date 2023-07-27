@@ -3,6 +3,7 @@
     import FrostedTextInput from "$components/reusable/FrostedTextInput.svelte";
     import ApiFetcher from "$services/ApiFetcher";
     import navaction from "$root/lib/navaction";
+    import Head from "$components/reusable/Head.svelte";
     $navaction = null;
     export let data;
     let { friends, username } = data;
@@ -24,6 +25,7 @@
     }
 </script>
 
+<Head title="Friends" />
 <div class="w-full flex flex-col gap-2">
     <h1 class="text-3xl">Friends</h1>
     <form on:submit={SearchFriends}>

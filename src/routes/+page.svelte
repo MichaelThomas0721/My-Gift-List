@@ -1,10 +1,12 @@
 <!-- A homepage isn't high in my priority list currently so this is what it is -->
 
 <script>
-  import navaction from "$root/lib/navaction";
+  import Head from "$components/reusable/Head.svelte";
+import navaction from "$root/lib/navaction";
   $navaction = null;
 </script>
 
+<Head title="Home" />
 <div class="">
   <div />
   <h1

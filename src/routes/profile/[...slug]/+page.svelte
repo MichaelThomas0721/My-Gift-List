@@ -8,6 +8,7 @@
         data as any;
     import navaction from "$root/lib/navaction";
     import { goto } from "$app/navigation";
+    import Head from "$components/reusable/Head.svelte";
     $navaction = owner ? () => goto(`/list/${uid}`) : null;
 
     async function Follow() {
@@ -35,6 +36,8 @@
     }
 </script>
 
+
+<Head title={username} />
 <div class="w-full max-w-3xl flex flex-col gap-2">
     <span class="flex flex-row gap-3 overflow-hidden text-ellipsis">
         <div

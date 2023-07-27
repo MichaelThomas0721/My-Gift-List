@@ -1,5 +1,6 @@
 <script>
     import Frame from "$components/loginsignup/frame.svelte";
+    import Head from "$components/reusable/Head.svelte";
     import { required as requiredM } from "$lib/validatorMessages";
     let fields = [
         {
@@ -26,6 +27,8 @@
     $navaction = null;
 </script>
 
+
+<Head title="Login" />
 <Frame
     title="Login"
     {fields}

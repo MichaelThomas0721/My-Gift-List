@@ -4,6 +4,7 @@
     import Popup from "$components/list/popup.svelte";
     import ApiFetcher from "$services/ApiFetcher";
     import navaction from "$lib/navaction";
+    import Head from "$components/reusable/Head.svelte";
     let { list, items, owner } = data;
     const popupItemTemplate = {
         _id: null,
@@ -81,6 +82,9 @@
         showPopup = false;
     }
 </script>
+
+
+<Head title="{list.Name}" />
 
 <div class="w-full h-full flex-grow">
     <div class={showPopup ? "hidden" : ""}>
