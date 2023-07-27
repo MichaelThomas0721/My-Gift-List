@@ -5,9 +5,6 @@ import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
 	plugins: [sveltekit(), react()],
-	build: {
-		outDir: 'public'
-	},
 	resolve: {
 		alias: {
 			$cms: path.resolve('./src/cms_requests'),
