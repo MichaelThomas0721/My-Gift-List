@@ -1,4 +1,5 @@
 export function passwordMatch(value, form) {
+	console.log("EEEEEEEEEEEEEE")
 	if (form.values['Confirm PasswordInput'] !== form.values['PasswordInput']) {
 			return { passwordMatch: true };
 	}
