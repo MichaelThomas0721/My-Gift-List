@@ -35,6 +35,7 @@
             fullRound={true}
             bind:bind={search}
             icon={"material-symbols:search"}
+            IconAction={SearchFriends}
             iconClass="-scale-x-100 text-gray-400"
         />
     </form>
