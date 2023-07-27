@@ -1,10 +1,10 @@
 {
-	"name": "my-app",
-	"version": "0.0.1",
+	"name": "my-gift-list",
+	"version": "1.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --host",
-		"build": "vite build",
+		"build": "vite build --output public",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
