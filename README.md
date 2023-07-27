@@ -4,6 +4,8 @@ My gift list is a website that I created because my family kept buying the
 same gifts for peoples birthdays, this fixes that problem by letting users
 make items as taken so that other users know not to purchase that gift.
 
+This repository is a complete rewrite of the previous (now archived) NextJs version of the website.
+
 The code is open source :)
 
 ## Setup
