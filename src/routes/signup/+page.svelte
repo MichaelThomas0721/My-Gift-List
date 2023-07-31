@@ -8,6 +8,8 @@
         username,
         password,
     } from "$lib/validatorMessages";
+    export let data;
+    console.log(data)
     let fields = [
         {
             name: "Email",
@@ -46,23 +48,6 @@
     import navaction from "$root/lib/navaction";
     import Head from "$components/reusable/Head.svelte";
     $navaction = null;
-
-    // Good idea but didn't work
-    // $: fieldBinds?.Password, MatchPassword();
-    // $: fieldBinds?.["Confirm Password"], MatchPassword();
-    // function MatchPassword() {
-    //     console.log(fields[3])
-    //     let index = fields[3]?.validators?.validators?.indexOf(passwordMatch);
-    //     if (fieldBinds?.Password == fieldBinds?.["Confirm Password"]) {
-    //         index != -1
-    //             ? fields[3]?.validators?.validators?.splice(index, 1)
-    //             : null;
-    //     } else {
-    //         index != -1
-    //             ? null
-    //             : fields[3]?.validators?.validators?.push(passwordMatch);
-    //     }
-    // }
 </script>
 
 <Head title="Sign Up" />

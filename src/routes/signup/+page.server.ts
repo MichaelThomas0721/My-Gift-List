@@ -21,15 +21,16 @@ export const actions = {
         const password = data.get('PasswordInput');
         if (!email || !username || !password) return fail(400, { credentials: true })
         let hashedPassword = await Hash(String(password));
-        let params = { "email": EncryptString(String(email)), "username": username, "password": hashedPassword }
+        let params = { "email": email, "username": username, "password": hashedPassword }
         if (SECRET_SETUP) {
             await CreateIndexMongo({ "username": 1 }, { "unique": true }, "users");
             await CreateIndexMongo({ "email": 1 }, { "unique": true }, "users");
         }
+        console.log(await FetchMongo({username}, "users"));
+        if ((await FetchMongo({ username }, "users"))[0]) return fail(403, { errorMsg: 'Username Taken' })
+        if ((await FetchMongo({ email }, "users"))[0]) return fail(403, { errorMsg: 'Email already in use' })
         let rData = await AddMongo(params, "users");
-        if (!rData) {
-            return fail(403, { data: 'Invalid username or password' });
-        }
+        if (!rData) return fail(403, { errorMsg: 'Error adding to data, please try again later' });
 
         let user = await FetchMongo({ _id: rData.insertedId }, "users")
         user = user[0];

@@ -3,10 +3,24 @@
     import FrostedCheckBox from "$components/reusable/FrostedCheckBox.svelte";
     import FrostedTextInput from "$components/reusable/FrostedTextInput.svelte";
     import SubmitButton from "$components/reusable/SubmitButton.svelte";
+    import { enhance } from "$app/forms";
+    import { goto } from "$app/navigation";
+    import ErrorMessage from "./ErrorMessage.svelte";
     export let title, fields, btmText, btmLink, action, fieldBinds;
     export let staySingedInCheckBox = false;
     export let staySignedIn = false;
+    let error = "";
     const form = useForm();
+
+    function Test() {
+        return async ({ result }) => {
+            if (result.type == "redirect") {
+                goto(result.location);
+            } else if (result.type == 'failure') {
+                error = result.data.errorMsg;
+            }
+        };
+    }
 </script>
 
 <form
@@ -14,7 +28,9 @@
     method="POST"
     class="flex flex-col max-w-2xl w-full mx-auto mt-[6vh] gap-3 bg-blue-400 bg-opacity-10 rounded-md p-6"
     use:form
+    use:enhance={Test}
 >
+    <ErrorMessage error={error} show={error != ""}/>
     <h1 class="text-center text-4xl font-semi-bold">{title}</h1>
     {#each fields as field}
         <FrostedTextInput
