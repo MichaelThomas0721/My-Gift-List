@@ -8,8 +8,6 @@
         username,
         password,
     } from "$lib/validatorMessages";
-    export let data;
-    console.log(data)
     let fields = [
         {
             name: "Email",

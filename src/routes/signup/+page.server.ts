@@ -26,7 +26,6 @@ export const actions = {
             await CreateIndexMongo({ "username": 1 }, { "unique": true }, "users");
             await CreateIndexMongo({ "email": 1 }, { "unique": true }, "users");
         }
-        console.log(await FetchMongo({username}, "users"));
         if ((await FetchMongo({ username }, "users"))[0]) return fail(403, { errorMsg: 'Username Taken' })
         if ((await FetchMongo({ email }, "users"))[0]) return fail(403, { errorMsg: 'Email already in use' })
         let rData = await AddMongo(params, "users");
