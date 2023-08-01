@@ -36,7 +36,6 @@
             Object.values(fieldErrors).every((fe) => fe == "")
         ) {
             disableForm = false;
-            console.log("VALID", disableForm);
         } else {
             disableForm = true;
         }

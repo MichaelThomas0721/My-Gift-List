@@ -4,7 +4,6 @@
     export let className = "";
     export let type = "button" as "button" | "submit" | "reset";
     export let disabled = false;
-    $: disabled, console.log("DIS", disabled);
 </script>
 
 <button
