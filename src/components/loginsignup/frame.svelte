@@ -25,8 +25,8 @@
 </script>
 
 <form
-    {action}
-    method="POST"
+    action={disableForm ? null : action}
+    method={"POST"}
     class="flex flex-col max-w-2xl w-full mx-auto mt-[6vh] gap-3 bg-blue-400 bg-opacity-10 rounded-md p-6"
     use:enhance={ManageForm}
 >
