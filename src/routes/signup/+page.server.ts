@@ -4,7 +4,6 @@ import AddObjectId from '$services/AddObjectId.js';
 import FetchMongo from '$services/FetchMongo.js';
 import CreateIndexMongo from '$services/CreateIndexMongo.js';
 import { SECRET_SETUP } from '$env/static/private';
-import EncryptString from '$services/EncryptString.js';
 import Hash from '$services/Hash.js';
 
 export const load = async ({ cookies }) => {
