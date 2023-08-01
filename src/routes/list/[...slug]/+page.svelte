@@ -84,7 +84,7 @@
 </script>
 
 
-<Head title="{list.Name}" />
+<Head title="{list.name}" />
 
 <div class="w-full h-full flex-grow">
     <div class={showPopup ? "hidden" : ""}>

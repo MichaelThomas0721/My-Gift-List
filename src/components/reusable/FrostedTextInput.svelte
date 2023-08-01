@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { Hint, HintGroup, validators } from "svelte-use-form";
     export let placeholder = "";
     export let fullRound = false;
     export let icon = "";
@@ -8,7 +7,8 @@
     export let bind = "";
     export let label = true;
     export let required = false;
-    export let formValidators = null;
+    export let unfocus = null;
+    export let ontype = null;
     let type = "text";
     if (placeholder == "Password" || placeholder == "Confirm Password") {
         type = "password";
@@ -28,6 +28,7 @@
 
     const handleInput = (e) => {
         bind = e.target.value;
+        ontype ? ontype(e) : null;
     };
 </script>
 
@@ -40,29 +41,17 @@
             fullRound ? "rounded-full" : "rounded-md"
         } bg-white bg-opacity-10 shadow-xl text-lg outline-none p-3 px-5 flex flex-row items-center`}
     >
-        {#if formValidators}
-            <input
-                {type}
-                id={placeholder + "Input"}
-                name={placeholder + "Input"}
-                class={`bg-transparent flex-grow outline-none`}
-                {placeholder}
-                on:input={handleInput}
-                {required}
-                use:validators={formValidators?.validators}
-            />
-        {:else}
-            <input
-                {type}
-                id={placeholder + "Input"}
-                name={placeholder + "Input"}
-                class={`bg-transparent flex-grow outline-none`}
-                {placeholder}
-                value={bind}
-                on:input={handleInput}
-                {required}
-            />
-        {/if}
+        <input
+            {type}
+            id={placeholder + "Input"}
+            name={placeholder + "Input"}
+            class={`bg-transparent flex-grow outline-none`}
+            {placeholder}
+            value={bind}
+            on:input={handleInput}
+            {required}
+            on:focusout={(e) => unfocus ? unfocus(e) : null}
+        />
         {#if icon}<button
                 type="button"
                 on:click={IconAction}
@@ -71,13 +60,4 @@
             >
         {/if}
     </span>
-    {#if formValidators?.names}
-        <HintGroup for={placeholder + "Input"}>
-            {#each formValidators?.names as hint, index}
-                <Hint on={hint} hideWhenRequired={hint != "required"}
-                    >{formValidators?.messages[index]}</Hint
-                >
-            {/each}
-        </HintGroup>
-    {/if}
 </span>

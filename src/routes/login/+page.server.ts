@@ -17,11 +17,11 @@ export const actions = {
         let params = { "username": username }
         let user = await FetchMongo(params, "users")
         user = user[0]
-        if (!user) return fail(400, { credentials: true })
+        if (!user) return fail(400, { errorMsg: "Username or Password is incorrect" })
 
         let match = await ComparePasswords(user.password, String(password));
         if (!match) {
-            return fail(400, { credentials: true })
+            return fail(400, { errorMsg: "Username or Password is incorrect" })
         }
 
         cookies.set('user', JSON.stringify(user), {

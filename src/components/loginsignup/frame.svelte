@@ -1,22 +1,23 @@
-<script>
-    import { useForm } from "svelte-use-form";
-    import FrostedCheckBox from "$components/reusable/FrostedCheckBox.svelte";
+<script lang="ts">
+    // import FrostedCheckBox from "$components/reusable/FrostedCheckBox.svelte";
     import FrostedTextInput from "$components/reusable/FrostedTextInput.svelte";
     import SubmitButton from "$components/reusable/SubmitButton.svelte";
     import { enhance } from "$app/forms";
     import { goto } from "$app/navigation";
     import ErrorMessage from "./ErrorMessage.svelte";
-    export let title, fields, btmText, btmLink, action, fieldBinds;
-    export let staySingedInCheckBox = false;
-    export let staySignedIn = false;
+    export let title, fields, btmText, btmLink, action, fieldBinds, fieldErrors;
+    // export let staySingedInCheckBox = false;
+    // export let staySignedIn = false;
+    export let unfocus = null as any;
+    export let ontype = null as any;
+    export let disableForm = true;
     let error = "";
-    const form = useForm();
 
-    function Test() {
+    function ManageForm() {
         return async ({ result }) => {
             if (result.type == "redirect") {
                 goto(result.location);
-            } else if (result.type == 'failure') {
+            } else if (result.type == "failure") {
                 error = result.data.errorMsg;
             }
         };
@@ -27,20 +28,21 @@
     {action}
     method="POST"
     class="flex flex-col max-w-2xl w-full mx-auto mt-[6vh] gap-3 bg-blue-400 bg-opacity-10 rounded-md p-6"
-    use:form
-    use:enhance={Test}
+    use:enhance={ManageForm}
 >
-    <ErrorMessage error={error} show={error != ""}/>
+    <ErrorMessage {error} show={error != ""} />
     <h1 class="text-center text-4xl font-semi-bold">{title}</h1>
-    {#each fields as field}
+    {#each Object.keys(fields) as field}
         <FrostedTextInput
-            placeholder={field.name}
-            bind:bind={fieldBinds[field.name]}
+            placeholder={field}
+            bind:bind={fieldBinds[field]}
             required={true}
-            formValidators={field.validators}
+            {unfocus}
+            {ontype}
         />
+        <p class={`${fieldErrors[field] ? '' : 'hidden'}`}>{fieldErrors[field]}</p>
     {/each}
-    {#if staySingedInCheckBox}<FrostedCheckBox bind:bind={staySignedIn} />{/if}
+    <!-- {#if staySingedInCheckBox}<FrostedCheckBox bind:bind={staySignedIn} />{/if} -->
     <p class="text-gray-300">
         {btmText}
         <a
@@ -49,5 +51,5 @@
             >{btmLink[0]}</a
         >
     </p>
-    <SubmitButton disabled={!$form.valid} {title} type="submit" />
+    <SubmitButton bind:disabled={disableForm} {title} type="submit" />
 </form>
