@@ -50,7 +50,7 @@
             value={bind}
             on:input={handleInput}
             {required}
-            on:focusout={(e) => unfocus(e)}
+            on:focusout={(e) => unfocus ? unfocus(e) : null}
         />
         {#if icon}<button
                 type="button"
