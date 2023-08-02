@@ -7,11 +7,11 @@
 </script>
 
 <Head title="Home" />
-<div class="flex flex-col items-center">
+<div class="flex flex-col gap-3 items-center">
   <h1
-    class="text-[10vw] font-bold text-white text-center bg-gradient-to-b from-darkGreen to-darkGreen"
+    class="text-3xl md:text-5xl lg:text-8xl font-bold text-white text-center bg-gradient-to-b from-darkGreen to-darkGreen"
   >
-    There is no homepage 0.0
+    Create an interactive gift list to prevent duplicate gifts!
   </h1>
   <a
     href="/signup"
