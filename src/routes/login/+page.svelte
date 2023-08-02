@@ -59,4 +59,10 @@
     unfocus={Touch}
     ontype={Validate}
     bind:disableForm
-/>
+>
+    <a
+        href="/forgot-password"
+        class="text-blue-400 font-bold underline hover:text-blue-600"
+        >Forgot Password?</a
+    >
+</Frame>
