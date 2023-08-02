@@ -51,5 +51,6 @@
             >{btmLink[0]}</a
         >
     </p>
+    <slot />
     <SubmitButton bind:disabled={disableForm} {title} type="submit" />
 </form>
