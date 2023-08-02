@@ -42,7 +42,6 @@
         />
         <p class={`${fieldErrors[field] ? '' : 'hidden'}`}>{fieldErrors[field]}</p>
     {/each}
-    <!-- {#if staySingedInCheckBox}<FrostedCheckBox bind:bind={staySignedIn} />{/if} -->
     <p class="text-gray-300">
         {btmText}
         <a
