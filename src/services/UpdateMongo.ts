@@ -2,7 +2,7 @@
 
 import clientPromise from "$lib/mongodb";
 
-export default async function UpdateMongo(params, newValues, collection) {
+export default async function UpdateMongo(params, newValues, collection, verification=false) {
     // Connect to mongodb
     const client = await clientPromise;
     const db = client.db();
