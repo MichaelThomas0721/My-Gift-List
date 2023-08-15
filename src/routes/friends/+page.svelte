@@ -29,8 +29,6 @@
                 i--;
             }
         }
-        console.log("R", results);
-        console.log("F", localResults);
     }
 </script>
 
