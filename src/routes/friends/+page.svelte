@@ -9,19 +9,28 @@
     let { friends, username } = data;
     let search = "";
     let results = [];
+    let localResults = friends;
 
     async function SearchFriends() {
-        if (search != username)
+        localResults = [];
+        let found = friends.find((f) => f.username == search);
+        if (found) {
+            localResults = [found];
+        } else if (search != username) {
             results = await ApiFetcher("/api/fetch-mongo", {
                 params: { username: search },
                 collection: "users",
             });
+        }
+
         for (let i = 0; i < results.length; i++) {
             if (friends.some((item) => item.username == results[i].username)) {
                 results.splice(i, i);
                 i--;
             }
         }
+        console.log("R", results);
+        console.log("F", localResults);
     }
 </script>
 
@@ -39,10 +48,10 @@
             iconClass="-scale-x-100 text-gray-400"
         />
     </form>
-    {#each results as friend}
+    {#each localResults as friend}
         <FriendItem {friend} />
     {/each}
-    {#each friends as friend}
+    {#each results as friend}
         <FriendItem {friend} />
     {/each}
 </div>
