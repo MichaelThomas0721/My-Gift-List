@@ -23,7 +23,7 @@ export const actions = {
         if (!match) {
             return fail(400, { errorMsg: "Username or Password is incorrect" })
         }
-
+        
         cookies.set('user', JSON.stringify(user), {
             path: '/',
 

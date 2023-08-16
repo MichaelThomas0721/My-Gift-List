@@ -21,9 +21,9 @@
 
     async function SubmitItem() {
         if (popupItem._id) {
-            let _id = popupItem._id;
+            const _id = popupItem._id;
             delete popupItem._id;
-            let rData = await ApiFetcher("/api/update-mongo", {
+            await ApiFetcher("/api/update-mongo", {
                 params: { _id },
                 newValues: { ...popupItem },
                 collection: "items",
@@ -32,7 +32,7 @@
             let idx = items.findIndex((x) => x._id == popupItem._id);
             items[idx] = popupItem;
         } else {
-            let rData = await ApiFetcher("/api/add-mongo", {
+            const rData = await ApiFetcher("/api/add-mongo", {
                 params: { ...popupItem, listId: list._id },
                 collection: "items",
             });
@@ -83,8 +83,7 @@
     }
 </script>
 
-
-<Head title="{list.name}" />
+<Head title={list.name} />
 
 <div class="w-full h-full flex-grow">
     <div class={showPopup ? "hidden" : ""}>
