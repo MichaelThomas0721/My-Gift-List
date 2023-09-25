@@ -13,9 +13,7 @@ export default async function ApiFetcher(path, params) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
             },
-            credentials: "same-origin",
             body: JSON.stringify(params)
         });
         return res.json()
