@@ -14,8 +14,8 @@ export default async function ApiFetcher(path, params) {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'mode': 'no-cors'
             },
+            mode: 'no-cors',
             body: JSON.stringify(params)
         });
         return res.json()
