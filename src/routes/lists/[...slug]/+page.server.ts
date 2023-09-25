@@ -22,7 +22,6 @@ export const actions = {
     createlist: async ({ cookies, request } ) => {
         const data = await request.formData()
         const name = data.get("List NameInput");
-        console.log(data)
         const user = JSON.parse(cookies.get('user'))
         let params = {name, userId: user._id}
         const u = cookies.get('user')

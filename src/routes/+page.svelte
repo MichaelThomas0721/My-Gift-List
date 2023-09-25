@@ -8,7 +8,7 @@
 </script>
 
 <Head title="Home" />
-<div class="flex flex-col gap-3 items-center justify-around gap-10 h-full">
+<div class="flex flex-col items-center justify-around gap-10 h-full">
   <h1
     class="text-3xl md:text-5xl lg:text-8xl font-bold text-white text-center bg-gradient-to-b from-darkGreen to-darkGreen"
   >
