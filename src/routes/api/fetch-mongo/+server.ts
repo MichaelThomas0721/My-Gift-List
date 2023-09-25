@@ -6,5 +6,6 @@ export const POST = async ({ params, request }) => {
     console.log(data);
     data.params = AddObjectId(data.params);
     let rData = await FetchMongo(data?.params, data?.collection);
+    console.log(rData);
     return new Response(JSON.stringify(rData), { status: 200 });
 };
