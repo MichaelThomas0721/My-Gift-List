@@ -3,9 +3,9 @@ import FetchMongo from '$services/FetchMongo.js';
 
 export const POST = async ({ params, request }) => {
     const data = await request.json();
-    console.log(data);
+    console.log("BRBEBR", data);
     data.params = AddObjectId(data.params);
     let rData = await FetchMongo(data?.params, data?.collection);
-    console.log(rData);
+    console.log("BRUUVUV", rData);
     return new Response(JSON.stringify(rData), { status: 200 });
 };
