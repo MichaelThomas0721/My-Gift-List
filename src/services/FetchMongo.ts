@@ -6,7 +6,7 @@ export default async function FetchMongo(params, collection, one = false) {
     // Connect to mongodb
     const client = await clientPromise;
     const db = client.db();
-
+    console.log("BDBDBD");
     // Get the data from mongodb using the params and collection
     try {
         let objects;
@@ -20,6 +20,7 @@ export default async function FetchMongo(params, collection, one = false) {
             objects = objects?.map(el => el._id ? { ...el, _id: el._id.toString() } : el)
         }
         // Return the objects
+        console.log("B<", objects);
         return objects
     } catch (e) {
         console.log(e)
