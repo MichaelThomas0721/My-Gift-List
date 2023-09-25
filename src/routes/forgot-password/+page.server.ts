@@ -3,9 +3,10 @@ import AddObjectId from "$services/AddObjectId.js";
 import CreateIndexMongo from "$services/CreateIndexMongo.js";
 import DeleteMongo from "$services/DeleteMongo.js";
 import FetchMongo from "$services/FetchMongo.js";
-import UpdateMongo from "$services/UpdateMongo.js";
+import nodemailer from "nodemailer";
 import { redirect } from "@sveltejs/kit"
 import crypto from "crypto";
+import { SendCode } from "$services/SendEmail.js";
 
 export const load = async ({ cookies }) => {
     if (cookies.get('user')) {
@@ -28,8 +29,10 @@ export const actions = {
             await DeleteMongo({ uid }, "codes");
             prevCode = await FetchMongo({ uid }, "codes", true);
         }
-        await AddMongo({ uid, code, createdAt: new Date() }, "codes");
+        const u = cookies.get('user')
+        await AddMongo({ uid, code, createdAt: new Date() }, "codes", u);
         await CreateIndexMongo({ "createdAt": 1 }, { expireAfterSeconds: 900 }, "codes");
+        SendCode(email, code);
         return "Password reset link has been sent to your email";
     }
 }

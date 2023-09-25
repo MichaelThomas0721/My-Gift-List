@@ -1,6 +1,6 @@
 <!-- Main Layout (Used for every page) -->
 
-<script>
+<script lang="ts">
   import Navbar from "$components/navbar/navbar.svelte";
   import "../app.css";
   // The current font I am using

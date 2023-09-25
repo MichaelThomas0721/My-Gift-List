@@ -13,14 +13,15 @@ export const load = async ({ cookies, params }) => {
 }
 
 export const actions = {
-    resetpassword: async ({ request, params }) => {
+    resetpassword: async ({ request, params, cookies }) => {
         let reset = await FetchMongo({ code: params?.slug }, "codes");
         if (!reset[0]) throw fail(400, { errorMsg: "Code Expired" });
         const data = await request.formData();
         const password = data.get('New PasswordInput');
         let hashedPassword = await Hash(String(password));
+        const user = cookies.get('user');
         reset = reset[0]
-        await UpdateMongo({ _id: reset.uid }, { password: hashedPassword }, "users")
+        await UpdateMongo({ _id: reset.uid }, { password: hashedPassword }, "users", user)
         await DeleteMongo({_id: reset._id }, "codes");
         throw redirect(302, '/login');
     }

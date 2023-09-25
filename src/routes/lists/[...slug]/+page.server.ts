@@ -25,7 +25,8 @@ export const actions = {
         console.log(data)
         const user = JSON.parse(cookies.get('user'))
         let params = {name, userId: user._id}
-        let rData = await AddMongo(params, "lists")
+        const u = cookies.get('user')
+        let rData = await AddMongo(params, "lists", u)
 
         throw redirect(302, `/list/${rData.insertedId}`)
     }
