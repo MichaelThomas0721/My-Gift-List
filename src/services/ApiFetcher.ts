@@ -12,7 +12,8 @@ export default async function ApiFetcher(path, params) {
         let res = await fetch(PUBLIC_ABS_URL + path, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
             },
             body: JSON.stringify(params)
         });
