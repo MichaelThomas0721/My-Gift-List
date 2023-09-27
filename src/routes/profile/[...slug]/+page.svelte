@@ -24,6 +24,7 @@
             });
             follow = undefined;
         } else {
+            console.log(profileId);
             let rData = await ApiFetcher("/api/add-mongo", {
                 params: { following: profileId, follower: uid },
                 collection: "friends",
