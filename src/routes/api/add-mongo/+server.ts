@@ -3,7 +3,7 @@ import AddMongo from '$services/AddMongo.js';
 
 export const POST = async ({ cookies, params, request }) => {
     const u = await cookies.get('user')
-    console.log(cookies);
+    console.log(u);
     const data = await request.json();
     data.params = AddObjectId(data.params);
     let rData = await AddMongo(data?.params, data?.collection, u);
