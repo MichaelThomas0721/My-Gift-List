@@ -6,6 +6,7 @@ export default async function DeleteMongo(params, collection) {
     // Connect to mongodb
     const client = await clientPromise;
     const db = client.db();
+    delete params.user;
 
     // Try to delete the document(s)
     try {
