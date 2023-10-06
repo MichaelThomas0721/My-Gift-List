@@ -34,7 +34,6 @@
         </div>
         <div class="flex-grow flex flex-col min-w-0">
             <p>@{username}</p>
-            <p>{profileId}</p>
         </div></span
     >
     {#if profileId == uid}
