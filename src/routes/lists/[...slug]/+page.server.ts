@@ -19,14 +19,12 @@ export const load = async ({ cookies, params }) => {
 }
 
 export const actions = {
-    createlist: async ({ cookies, request } ) => {
+    createlist: async ({ cookies, request }) => {
         const data = await request.formData()
         const name = data.get("List NameInput");
-        console.log(data)
-        const user = JSON.parse(cookies.get('user'))
-        let params = {name, userId: user._id}
-        const u = cookies.get('user')
-        let rData = await AddMongo(params, "lists", u)
+        let user = cookies.get('user') ? JSON.parse(cookies.get('user')) : null;
+        let params = { name, userId: user._id, user }
+        let rData = await AddMongo(params, "lists")
 
         throw redirect(302, `/list/${rData.insertedId}`)
     }

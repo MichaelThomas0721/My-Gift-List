@@ -10,26 +10,13 @@
     import navaction from "$root/lib/navaction";
     import { goto } from "$app/navigation";
     import Head from "$components/reusable/Head.svelte";
+    import { enhance } from "$app/forms";
     $navaction = owner ? () => goto(`/list/${uid}`) : null;
 
     async function Follow() {
-        if (uid == null) {
-            goto("/login");
-            return;
-        }
-        if (follow) {
-            await ApiFetcher("/api/delete-mongo", {
-                params: { _id: follow?._id },
-                collection: "friends",
-            });
-            follow = undefined;
-        } else {
-            let rData = await ApiFetcher("/api/add-mongo", {
-                params: { following: profileId, follower: uid },
-                collection: "friends",
-            });
-            follow = rData;
-        }
+        return async ({ update }) => {
+            update({ reset: false });
+        };
     }
 
     function OpenItem(item) {
@@ -38,7 +25,7 @@
 </script>
 
 <Head title={username} />
-<div class="w-full max-w-3xl flex flex-col gap-2">
+<div class="w-full mx-auto max-w-3xl flex flex-col gap-2">
     <span class="flex flex-row gap-3 overflow-hidden text-ellipsis">
         <div
             class="w-32 aspect-square rounded-md bg-gray-500 flex-shrink-0 flex justify-center items-center"
@@ -47,12 +34,29 @@
         </div>
         <div class="flex-grow flex flex-col min-w-0">
             <p>@{username}</p>
+            <p>{profileId}</p>
         </div></span
     >
     {#if profileId == uid}
         <SettingsButton />
+    {:else if uid}
+        <form
+            action={follow ? "?/unfollow" : "?/follow"}
+            method={"POST"}
+            class="flex flex-col max-w-2xl w-full mx-auto mt-[6vh] gap-3 bg-blue-400 bg-opacity-10 rounded-md p-6"
+            use:enhance={Follow}
+        >
+            <FollowButton {follow} />
+            <input
+                class="hidden"
+                type="text"
+                name="following"
+                id="following"
+                bind:value={profileId}
+            />
+        </form>
     {:else}
-        <FollowButton Action={Follow} {follow} />
+        <FollowButton follow={false} redirect={"/login"} />
     {/if}
     <span class="flex flex-row justify-between text-2xl"
         ><a href={`/list/${profileId}`}>Wish List:</a><a

@@ -1,7 +1,5 @@
 <script lang="ts">
     import Frame from "$components/loginsignup/frame.svelte";
-    import { required, minLength, email, maxLength } from "svelte-use-form";
-    import ValidateString from "$lib/validateString";
     import {
         required as requiredM,
         email as emailM,

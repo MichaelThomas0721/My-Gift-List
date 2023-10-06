@@ -6,7 +6,6 @@ export default async function FetchMongo(params, collection, one = false) {
     // Connect to mongodb
     const client = await clientPromise;
     const db = client.db();
-
     // Get the data from mongodb using the params and collection
     try {
         let objects;

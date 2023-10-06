@@ -9,7 +9,7 @@
     let { friends, username } = data;
     let search = "";
     let results = [];
-    let localResults = friends;
+    let localResults = friends ? friends : [];
 
     async function SearchFriends() {
         localResults = [];
