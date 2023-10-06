@@ -71,7 +71,6 @@
         let idx = items.findIndex((x) => x._id == data._id);
         items[idx].taken = data.taken;
     }
-
 </script>
 
 <Head title={list.name} />

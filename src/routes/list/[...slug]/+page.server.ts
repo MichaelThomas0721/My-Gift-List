@@ -69,8 +69,8 @@ export const actions = {
     _id ? _id = AddObjectId(_id) : null;
     if (!_id) return false;
     const taken = data.get("taken");
-    
+
     await UpdateMongo({ _id }, { taken: !taken }, "items");
-    return JSON.stringify({_id: _id.toString(), type: "taken", taken: !taken})
+    return JSON.stringify({ _id: _id.toString(), type: "taken", taken: !taken })
   }
 }

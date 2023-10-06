@@ -14,26 +14,9 @@
     $navaction = owner ? () => goto(`/list/${uid}`) : null;
 
     async function Follow() {
-        return async ({update}) => {
+        return async ({ update }) => {
             update({ reset: false });
-        }
-        // if (uid == null) {
-        //     goto("/login");
-        //     return;
-        // }
-        // if (follow) {
-        //     await ApiFetcher("/api/delete-mongo", {
-        //         params: { _id: follow?._id },
-        //         collection: "friends",
-        //     });
-        //     follow = undefined;
-        // } else {
-        //     let rData = await ApiFetcher("/api/add-mongo", {
-        //         params: { following: profileId, follower: uid },
-        //         collection: "friends",
-        //     });
-        //     follow = rData;
-        // }
+        };
     }
 
     function OpenItem(item) {
@@ -42,7 +25,7 @@
 </script>
 
 <Head title={username} />
-<div class="w-full max-w-3xl flex flex-col gap-2">
+<div class="w-full mx-auto max-w-3xl flex flex-col gap-2">
     <span class="flex flex-row gap-3 overflow-hidden text-ellipsis">
         <div
             class="w-32 aspect-square rounded-md bg-gray-500 flex-shrink-0 flex justify-center items-center"
@@ -57,7 +40,6 @@
     {#if profileId == uid}
         <SettingsButton />
     {:else if uid}
-
         <form
             action={follow ? "?/unfollow" : "?/follow"}
             method={"POST"}
@@ -65,10 +47,16 @@
             use:enhance={Follow}
         >
             <FollowButton {follow} />
-            <input class="hidden" type="text" name="following" id="following" bind:value={profileId} />
+            <input
+                class="hidden"
+                type="text"
+                name="following"
+                id="following"
+                bind:value={profileId}
+            />
         </form>
     {:else}
-        <FollowButton follow={false} redirect={"/login"}/>
+        <FollowButton follow={false} redirect={"/login"} />
     {/if}
     <span class="flex flex-row justify-between text-2xl"
         ><a href={`/list/${profileId}`}>Wish List:</a><a
