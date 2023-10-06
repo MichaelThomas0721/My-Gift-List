@@ -28,13 +28,13 @@ export const actions = {
         }
         if ((await FetchMongo({ username }, "users"))[0]) return fail(403, { errorMsg: 'Username Taken' })
         if ((await FetchMongo({ email }, "users"))[0]) return fail(403, { errorMsg: 'Email already in use' })
-        let rData: any = await AddMongo(params, "users", null);
+        let rData: any = await AddMongo(params, "users");
         if (!rData) return fail(403, { errorMsg: 'Error adding to data, please try again later' });
 
         let user: any = await FetchMongo({ _id: rData.insertedId }, "users")
         user = user[0];
         let _id = await AddObjectId(user._id)
-        await AddMongo({ _id, name: `${user.username}'s Wishlist`, userId: user._id }, "lists", user);
+        await AddMongo({ _id, name: `${user.username}'s Wishlist`, userId: user._id, user: user }, "lists");
         if (!user) return fail(400, { credentials: true })
         cookies.set('user', JSON.stringify(user), {
             path: '/',

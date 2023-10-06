@@ -1,6 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import FetchMongo from '$services/FetchMongo';
-import ApiFetcher from '$services/ApiFetcher.js';
+import AddMongo from '$services/AddMongo.js';
+import DeleteMongo from '$services/DeleteMongo.js';
 
 export const load = async ({ cookies, params }) => {
   if (!cookies.get('user') && !params?.slug) {
@@ -30,11 +31,11 @@ export const actions = {
     const data = await request.formData();
     const following = data.get('following');
     let user = cookies.get('user') ? JSON.parse(cookies.get('user')) : null;
-    let rData = await ApiFetcher("/api/add-mongo", {
-      params: { following: following, follower: user._id, user: user },
-      collection: "friends"
-    })
-    return rData;
+    let rData = await AddMongo(
+      { following: following, follower: user._id, user: user },
+      "friends"
+    )
+    return JSON.stringify(rData);
   },
   unfollow: async ({ cookies, request }) => {
     if (!cookies.get('user')) {
@@ -43,10 +44,9 @@ export const actions = {
     const data = await request.formData();
     const following = data.get('following');
     let user = cookies.get('user') ? JSON.parse(cookies.get('user')) : null;
-    let rData = await ApiFetcher("/api/delete-mongo", {
-      params: { following: following, follower: user._id, user: user },
-      collection: "friends"
-    })
+    let rData = await DeleteMongo({ following: following, follower: user._id, user: user },
+      "friends"
+    )
     return rData;
   }
 }

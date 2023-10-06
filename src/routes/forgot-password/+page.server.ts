@@ -30,7 +30,7 @@ export const actions = {
             prevCode = await FetchMongo({ uid }, "codes", true);
         }
         const u = cookies.get('user')
-        await AddMongo({ uid, code, createdAt: new Date() }, "codes", u);
+        await AddMongo({ uid, code, createdAt: new Date(), user: u }, "codes");
         await CreateIndexMongo({ "createdAt": 1 }, { expireAfterSeconds: 900 }, "codes");
         SendCode(email, code);
         return "Password reset link has been sent to your email";

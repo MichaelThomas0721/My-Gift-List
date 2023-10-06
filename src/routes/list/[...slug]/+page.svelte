@@ -19,33 +19,15 @@
     let showPopup = false;
     $navaction = owner ? () => ShowPopup(false) : null;
 
-    async function SubmitItem() {
-        if (popupItem._id) {
-            const _id = popupItem._id;
-            delete popupItem._id;
-            await ApiFetcher("/api/update-mongo", {
-                params: { _id },
-                newValues: { ...popupItem },
-                collection: "items",
-            });
-            popupItem._id = _id;
-            let idx = items.findIndex((x) => x._id == popupItem._id);
-            items[idx] = popupItem;
-        } else {
-            const rData = await ApiFetcher("/api/add-mongo", {
-                params: { ...popupItem, listId: list._id },
-                collection: "items",
-            });
-            items = [
-                ...items,
-                {
-                    ...popupItem,
-                    _id: rData.insertedId,
-                    listId: list._id,
-                },
-            ];
-        }
-        showPopup = false;
+    async function FormReturnHandler() {
+        return async ({ result }) => {
+            const data = JSON.parse(result.data);
+            if (data?.type == "submit") await SubmitItem(data);
+            else if (data?.type == "delete") await DeleteItem(data);
+            else if (data?.type == "taken") await ToggleTaken(data);
+            ClosePopup();
+            ClearPopup();
+        };
     }
 
     function ShowPopup(item) {
@@ -61,26 +43,35 @@
         showPopup = false;
     }
 
-    async function ToggleTaken() {
-        await ApiFetcher("/api/update-mongo", {
-            params: { _id: popupItem._id },
-            newValues: { taken: !popupItem.taken },
-            collection: "items",
-        });
-        popupItem.taken = !popupItem.taken;
-        let idx = items.findIndex((x) => x._id == popupItem._id);
-        items[idx] = popupItem;
+    function ClearPopup() {
+        popupItem = popupItemTemplate;
     }
 
-    async function DeleteItem() {
-        await ApiFetcher("/api/delete-mongo", {
-            params: { _id: popupItem._id },
-            collection: "items",
-        });
-        let idx = items.findIndex((x) => x._id == popupItem._id);
-        items = [...items.splice(idx, idx)];
-        showPopup = false;
+    async function SubmitItem(data) {
+        if (data.new) {
+            items = [
+                ...items,
+                {
+                    ...data.newItem,
+                },
+            ];
+        } else {
+            let idx = items.findIndex((x) => x._id == data.newItem._id);
+            items[idx] = data.newItem;
+        }
     }
+
+    async function DeleteItem(data) {
+        let idx = items.findIndex((x) => x._id == data._id);
+        items.splice(idx, 1);
+        items = [...items];
+    }
+
+    async function ToggleTaken(data) {
+        let idx = items.findIndex((x) => x._id == data._id);
+        items[idx].taken = data.taken;
+    }
+
 </script>
 
 <Head title={list.name} />
@@ -92,11 +83,12 @@
     </div>
     <Popup
         bind:item={popupItem}
-        Action={SubmitItem}
+        Action={FormReturnHandler}
+        Post={"?/submitItem"}
         {ClosePopup}
         {ToggleTaken}
-        {DeleteItem}
         {owner}
+        listId={list._id}
         className={showPopup ? "" : "hidden"}
     />
 </div>
