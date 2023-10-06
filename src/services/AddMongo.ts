@@ -6,7 +6,7 @@ export default async function AddMongo(params, collection) {
     // Connect to mongodb
     const client = await clientPromise;
     const db = client.db();
-    if (collection == "users" || ! await BackendVerify(params)) return false;
+    if (collection != "users" && ! await BackendVerify(params)) return false;
     delete params.user;
     // Add the data to the database or catch the error
     try {
