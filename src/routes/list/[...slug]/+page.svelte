@@ -75,8 +75,8 @@
 
 <Head title={list.name} />
 
-<div class="w-full h-full flex-grow">
-    <div class={showPopup ? "hidden" : ""}>
+<div class="w-full max-h-full h-fit flex flex-col relative">
+    <div class={`${showPopup ? "hidden" : ""} max-h-full flex flex-col flex-grow relative min-h-0`}>
         <h1 class="text-3xl font-bold text-center py-3">List Items</h1>
         <ItemList {items} Action={ShowPopup} {owner} />
     </div>

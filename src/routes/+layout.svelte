@@ -13,7 +13,7 @@
 <div
   class="h-full min-h-full w-full bg-background text-white flex flex-col overflow-hidden box-border"
 >
-  <div class="p-3 w-full overflow-hidden">
+  <div class="p-1 md:p-4 w-full overflow-hidden">
     <slot />
   </div>
   <Navbar />
