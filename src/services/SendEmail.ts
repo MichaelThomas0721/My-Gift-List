@@ -19,12 +19,14 @@ export default async function SendEmail(receiever, subject, content) {
     }
     console.log("BRUV")
     await transporter.sendMail(mailOptions, function (error, info) {
+        console.log("SDFIUSDFHIUFHDSIUFHFDSIUHSDFU", info)
         if (error) {
-            console.log(error);
+            console.log("ERRROR", error);
         } else {
             console.log("Email sent: " + info.response);
         }
     })
+    console.log("SFHDHFDSHFUSDHUFSDH")
 }
 
 export async function SendCode(receiver, code) {
