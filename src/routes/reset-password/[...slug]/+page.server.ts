@@ -19,10 +19,10 @@ export const actions = {
         const data = await request.formData();
         const password = data.get('New PasswordInput');
         let hashedPassword = await Hash(String(password));
-        const user = cookies.get('user');
         reset = reset[0]
-        await UpdateMongo({ _id: reset.uid }, { password: hashedPassword }, "users", user)
-        await DeleteMongo({_id: reset._id }, "codes");
+        await UpdateMongo({ _id: reset.uid, user: { code: params?.slug }, }, { password: hashedPassword }, "users",)
+        await DeleteMongo({ _id: reset._id, }, "codes");
+
         throw redirect(302, '/login');
     }
 }

@@ -1,6 +1,6 @@
 <script>
     import FrostedTextInput from "$components/reusable/FrostedTextInput.svelte";
-import Head from "$components/reusable/Head.svelte";
+    import Head from "$components/reusable/Head.svelte";
     import PageHeading from "$components/reusable/PageHeading.svelte";
     import SubmitButton from "$components/reusable/SubmitButton.svelte";
 </script>
