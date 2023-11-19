@@ -18,7 +18,7 @@ export default async function SendEmail(receiever, subject, content) {
         html: content
     }
     console.log("BRUV")
-    await transporter.sendMail(mailOptions, function (error, info) {
+    await transporter.sendMail(mailOptions, async function (error, info) {
         console.log("SDFIUSDFHIUFHDSIUFHFDSIUHSDFU", info)
         if (error) {
             console.log("ERRROR", error);
