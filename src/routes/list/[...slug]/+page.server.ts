@@ -64,17 +64,13 @@ export const actions = {
     return JSON.stringify({ _id: _id.toString(), type: "delete" });
   },
   toggleTaken: async ({ cookies, request }) => {
-    console.log("BRUV")
     const data = await request.formData();
     let _id = data.get("_id");
     _id ? _id = await AddObjectId(_id) : null;
     if (!_id) return false;
-    console.log("DATA", data)
     let taken = data.get("taken") as any;
     if (taken == "false") taken = false
     else taken = true
-    console.log("TAKEN???", !taken)
-    console.log(await UpdateMongo({ _id }, { taken: !taken }, "items"));
     return JSON.stringify({ _id: _id.toString(), type: "taken", taken: !taken })
   }
 }
