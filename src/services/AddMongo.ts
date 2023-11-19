@@ -10,11 +10,9 @@ export default async function AddMongo(params, collection) {
     delete params.user;
     // Add the data to the database or catch the error
     try {
-        console.log("WTTWTWTW")
         return await db.collection(collection).insertOne(params)
     } catch (e) {
         console.log(e)
-        console.log("EREROEROREOREO")
         return false;
     }
 }

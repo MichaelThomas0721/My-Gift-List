@@ -26,7 +26,7 @@ export const actions = {
     }
     const data = await request.formData();
     let user = cookies.get('user') ? JSON.parse(cookies.get('user')) : null;
-    let _id = data.get("itemId");
+    let _id = data.get("_id");
     _id ? _id = AddObjectId(_id) : null;
     const listId = data.get("listId");
     const Name = data.get("NameInput");
@@ -56,7 +56,7 @@ export const actions = {
 
     const data = await request.formData();
     let user = cookies.get('user') ? JSON.parse(cookies.get('user')) : null;
-    let _id = data.get("itemId");
+    let _id = data.get("_id");
     _id ? _id = AddObjectId(_id) : null;
     if (!_id) return false;
 
@@ -65,12 +65,12 @@ export const actions = {
   },
   toggleTaken: async ({ cookies, request }) => {
     const data = await request.formData();
-    let _id = data.get("itemId");
-    _id ? _id = AddObjectId(_id) : null;
+    let _id = data.get("_id");
+    _id ? _id = await AddObjectId(_id) : null;
     if (!_id) return false;
-    const taken = data.get("taken");
-
-    await UpdateMongo({ _id }, { taken: !taken }, "items");
+    let taken = data.get("taken") as any;
+    if (taken == "false") taken = false
+    else taken = true
     return JSON.stringify({ _id: _id.toString(), type: "taken", taken: !taken })
   }
 }

@@ -15,7 +15,6 @@ export const load: PageLoad = async ({ cookies }: any) => {
 
 export const actions = {
     signup: async ({ cookies, request }: any) => {
-        console.log("WTG");
         const data = await request.formData()
         const email: String = data.get('EmailInput');
         const username: String = data.get('UsernameInput');
