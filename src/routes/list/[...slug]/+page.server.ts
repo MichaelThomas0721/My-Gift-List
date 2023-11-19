@@ -10,13 +10,15 @@ export const load = async ({ cookies, params }) => {
   let listId = new ObjectId(params?.slug)
   let list = await FetchMongo({ _id: listId }, "lists", true)
   let items = await FetchMongo({ listId: params?.slug }, "items")
+  let ownerData = await FetchMongo({ _id: AddObjectId(list.userId) }, "users")
+  const ownerName = ownerData?.[0]?.username
   let owner = false;
   if (cookies.get('user')) {
     if (JSON.parse(cookies.get('user'))._id == list.userId) {
       owner = true;
     }
   }
-  return { list, items, owner }
+  return { list, items, owner, ownerName }
 }
 
 export const actions = {
