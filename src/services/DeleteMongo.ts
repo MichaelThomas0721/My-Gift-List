@@ -10,7 +10,7 @@ export default async function DeleteMongo(params, collection) {
     const db = client.db();
     if (collection != "codes" && ! await BackendVerify(params)) return false;
     delete params.user;
-    if (params._id){
+    if (params._id && typeof params._id == "string"){
         params._id = await AddObjectId(params._id)
     }
 

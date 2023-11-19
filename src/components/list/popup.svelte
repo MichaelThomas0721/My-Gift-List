@@ -21,7 +21,7 @@
     class={`w-full h-full top-0 left-0 flex flex-col gap-6 p-3 bg-white bg-opacity-5 backdrop-blur-xl ${className}`}
 >
     {#each Object.keys(item) as field}
-        {#if field != "_id" && field != "listId"}
+        {#if field != "_id" && field != "listId" && field != "taken"}
             {#if owner}
                 {#if field != "taken"}
                     <FrostedTextInput
@@ -33,7 +33,7 @@
                 <DisplayText title={field} text={item[field]} />
             {/if}
         {:else}
-            <input value={item[field]} name="itemId" class="hidden" />
+            <input value={item[field]} name={field} class="hidden" />
         {/if}
     {/each}
     {#if owner}

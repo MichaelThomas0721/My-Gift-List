@@ -2,7 +2,6 @@
     export let data;
     import ItemList from "$components/list/itemList.svelte";
     import Popup from "$components/list/popup.svelte";
-    import ApiFetcher from "$services/ApiFetcher";
     import navaction from "$lib/navaction";
     import Head from "$components/reusable/Head.svelte";
     let { list, items, owner } = data;
