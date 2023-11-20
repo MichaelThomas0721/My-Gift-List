@@ -30,7 +30,7 @@ export const actions = {
         }
         await AddMongo({ uid, code, createdAt: new Date()}, "codes");
         await CreateIndexMongo({ "createdAt": 1 }, { expireAfterSeconds: 900 }, "codes");
-        SendCode(email, code);
+        await SendCode(email, code);
         return "Password reset link has been sent to your email";
     }
 }
