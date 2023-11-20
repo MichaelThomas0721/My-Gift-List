@@ -24,8 +24,9 @@ export default async function SendEmail(receiever, subject, content) {
             } else {
                 console.log("Email sent: " + info.response);
             }
+            resolve(true)
         })
-        resolve(null)
+        
     });
 }
 
