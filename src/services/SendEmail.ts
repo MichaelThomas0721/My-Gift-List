@@ -18,14 +18,16 @@ export default async function SendEmail(receiever, subject, content) {
         html: content
     }
     console.log("BRUV")
-    await transporter.sendMail(mailOptions, async function (error, info) {
-        console.log("SDFIUSDFHIUFHDSIUFHFDSIUHSDFU", info)
-        if (error) {
-            console.log("ERRROR", error);
-        } else {
-            console.log("Email sent: " + info.response);
-        }
-    })
+    await new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+            console.log("SDFIUSDFHIUFHDSIUFHFDSIUHSDFU", info)
+            if (error) {
+                console.log("ERRROR", error);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        })
+    });
     console.log("SFHDHFDSHFUSDHUFSDH")
 }
 
