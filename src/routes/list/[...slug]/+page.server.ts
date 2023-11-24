@@ -73,6 +73,7 @@ export const actions = {
     let taken = data.get("taken") as any;
     if (taken == "false") taken = false
     else taken = true
+    await UpdateMongo({ _id }, { taken: !taken }, "items")
     return JSON.stringify({ _id: _id.toString(), type: "taken", taken: !taken })
   }
 }
